@@ -1,9 +1,9 @@
 {
 	"required": true,
-	"package": "com.ayydxn.fabricmodtemplate.mixin",
+	"package": "com.ayydxn.worldbackmachine.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+
 	],
 	"injectors": {
 		"defaultRequire": 1
