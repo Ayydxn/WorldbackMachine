@@ -24,6 +24,15 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric_api_version")}")
+
+    // Google APIs
+    implementation("com.google.api-client:google-api-client:${rootProject.property("google_api_client_version")}")
+    implementation("com.google.oauth-client:google-oauth-client-jetty:${rootProject.property("google_oauth_client_version")}")
+    implementation("com.google.apis:google-api-services-drive:${rootProject.property("google_drive_api_version")}")
+
+    include("com.google.api-client:google-api-client:${rootProject.property("google_api_client_version")}")
+    include("com.google.oauth-client:google-oauth-client-jetty:${rootProject.property("google_oauth_client_version")}")
+    include("com.google.apis:google-api-services-drive:${rootProject.property("google_drive_api_version")}")
 }
 
 tasks {

@@ -38,3 +38,6 @@ replay_*.log
 .metadata
 .settings
 .architectury-transformer
+
+# Worldback Machine
+/src/main/resources/auth/**.**
