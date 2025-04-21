@@ -2,7 +2,6 @@ package com.ayydxn.worldbackmachine;
 
 import com.ayydxn.worldbackmachine.google.GoogleDriveAPI;
 import com.ayydxn.worldbackmachine.google.GoogleDriveBootstrap;
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;

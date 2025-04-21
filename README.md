@@ -1,41 +1,51 @@
-# Fabric Mod Template
+# Worldback Machine
+
+![GitHub License](https://img.shields.io/github/license/Ayydxn/Iridium)
+![GitHub Issues](https://img.shields.io/github/issues/Ayydxn/Iridium)
+![GitHub Pull Requests](https://img.shields.io/github/issues-pr/Ayydxn/Iridium)
 
 ---
 
-An easy-to-use Minecraft mod template for mods that are built on the Fabric mod loader.
-
-This template follows the **DRY** principle (Don't Repeat Yourself). This means that you can change any of your mod's details in the gradle.properties file and have those changes be automatically reflected in your fabric.mod.json.
-
-Lastly, for those of you who use GitHub Actions, it comes with a [super basic workflow file](https://github.com/Ayydxn/FabricModTemplate/blob/master/.github/workflows/build.yml) that will build your mod on every pull request and push to your repository.
+Worldback Machine is a Minecraft mod which adds support for cloud saving worlds using Google Drive.
 
 ---
 
-## ❗Reporting Issues
+## 🔽 Installation
 
-If you come across any bugs/issues while using the template, you can report them using the [issue tracker](https://github.com/Ayydxn/FabricModTemplate/issues). Before opening an issue, please use the search tool to make sure that your issue hasn't already been reported. As soon as an issue is found to be a duplicate, it will be closed immediately.
-
-Please note that while the issue tracker is also open to feature requests such as adding support for another mod loader.
+As of currently, no builds of Worldback Machine are being released anywhere. Check back the mod when has been released.
 
 ---
 
-## 🛠️ Usage
+## 🐛 Reporting Issues
+
+You can report any bugs or issues you come across using the [issue tracker](https://github.com/Ayydxn/WorldbackMachine/issues). Before opening a new issue, please use the search tool to make sure your issue hasn't already been reported. Issues that are duplicates of one another or do not contain the necessary information needed to debug them may be closed.
+
+---
+
+## 🛠 Building From Sources
 
 ### 📃 Requirements
 
-- A JDK (Java Development Kit) for Java 21.
-    - I recommend using the [Azul Zulu]() distribution as this is what the template is built with. However, any JDK distribution should work perfectly fine.
+- **Java 21 JDK**
+  - I recommend using the [Azul Zulu](https://www.azul.com) distribution as it is what I use to build the mod but, this isn't strictly required. You should be able to use whichever JDK distribution you want without issues.
+- **A Google Cloud Project**
+  - In order to be able to access and use the Google Drive, you'll need a Google Cloud project. You can follow [this guide](https://developers.google.com/workspace/drive/api/quickstart/java) to create one.
 
-- Any Java IDE such as [IntelliJ IDEA](https://www.jetbrains.com/idea/) or [Eclipse](https://www.eclipse.org/ide/). You may also use other code editors with support for Java and Gradle such as [Visual Studio Code](https://code.visualstudio.com/).
-    - If you're new to modding, I recommend using IntelliJ IDEA as it is what is used by most people for modding. It is also what is used in most modding tutorials.
 
-After cloning the project, you'll want to open it in your chosen code editor and wait for Gradle to load the project. Once the project has loaded, you can start modding!
+Like most Minecraft mods, Worldback Machine uses the standard Gradle project structure and can be compiled by simply running the default `build` task. After running the task, the build artifacts can be found in the `build/libs` directory.
 
-If you want to change any of the details about your mod such as the name or version, you will want to do that in the gradle.properties file.
+In order to run the game from within your IDE, you'll need two more things: A Google OAuth 2.0 Client ID and a dotenv file.
 
-To build your mod, you can run the default `build` task and your mod will be built. The built JAR can be found in the `build/libs` folder.
+Firstly, in the `resources` directory, create a file called `.env`. Then copy and paste the following:
+```text
+# The location of the 'credentials.json' file starting from the 'resources' directory.
+CREDENTIALS_FILE=
+```
+
+Set the 'CREDENTIALS_FILE' to whatever you want. You can then follow the [Google Drive API Java Quickstart](https://developers.google.com/workspace/drive/api/quickstart/java) to a OAuth Client ID. Once you have it, put it to the location you have set in the 'CREDENTIALS_FILE' variable.
 
 ---
 
-## 📄 License
+## 📃 License
 
-This template is available under the CC0 license. For more information, please read the license [here](https://choosealicense.com/licenses/cc0-1.0/#). 
+Worldback Machine is licensed under the free and open-source license, GNU LGPLv3. For more information, please read the [license](https://choosealicense.com/licenses/lgpl-3.0/).

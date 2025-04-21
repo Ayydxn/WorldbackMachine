@@ -33,6 +33,10 @@ dependencies {
     include("com.google.api-client:google-api-client:${rootProject.property("google_api_client_version")}")
     include("com.google.oauth-client:google-oauth-client-jetty:${rootProject.property("google_oauth_client_version")}")
     include("com.google.apis:google-api-services-drive:${rootProject.property("google_drive_api_version")}")
+
+    // Utility Libraries
+    implementation("io.github.cdimascio:dotenv-java:${rootProject.property("dotenv_version")}")
+    include("io.github.cdimascio:dotenv-java:${rootProject.property("dotenv_version")}")
 }
 
 tasks {
