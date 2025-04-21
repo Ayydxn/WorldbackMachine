@@ -2,6 +2,8 @@ package com.ayydxn.worldbackmachine;
 
 import com.ayydxn.worldbackmachine.google.GoogleDriveAPI;
 import com.ayydxn.worldbackmachine.google.GoogleDriveBootstrap;
+import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -17,6 +19,7 @@ public class WorldbackMachineMod implements ModInitializer
     public static final String MOD_ID = "worldback-machine";
 
     private GoogleDriveAPI googleDriveAPI;
+    private String saveFolderID;
 
     @Override
     public void onInitialize()
@@ -29,11 +32,15 @@ public class WorldbackMachineMod implements ModInitializer
         try
         {
             this.googleDriveAPI = GoogleDriveBootstrap.bootstrap();
+            Preconditions.checkArgument(this.googleDriveAPI != null);
         }
         catch (Exception exception)
         {
             LOGGER.error(ExceptionUtils.getStackTrace(exception));
         }
+
+        this.saveFolderID = this.googleDriveAPI.createFolder("Worldback Machine")
+                .orElseThrow(NullPointerException::new);
     }
 
     public static WorldbackMachineMod getInstance()
@@ -52,5 +59,10 @@ public class WorldbackMachineMod implements ModInitializer
     public GoogleDriveAPI getGoogleDriveAPI()
     {
         return this.googleDriveAPI;
+    }
+
+    public String getSaveFolderID()
+    {
+        return this.saveFolderID;
     }
 }
