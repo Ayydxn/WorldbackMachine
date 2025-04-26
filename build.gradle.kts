@@ -8,6 +8,10 @@ group = rootProject.property("maven_group").toString()
 
 base.archivesName.set("${rootProject.property("archives_base_name").toString()}-fabric")
 
+loom {
+    accessWidenerPath = file("src/main/resources/worldback-machine.accesswidener")
+}
+
 repositories {
     // Add repositories to retrieve artifacts from in here.
     // You should only use this when depending on other mods because

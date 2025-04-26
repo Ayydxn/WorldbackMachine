@@ -1,6 +1,9 @@
 package com.ayydxn.worldbackmachine.utils;
 
 import com.ayydxn.worldbackmachine.WorldbackMachineMod;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.fabricmc.loader.api.FabricLoader;
 
@@ -8,6 +11,14 @@ import java.nio.file.Path;
 
 public class WorldbackMachineConstants
 {
+    public static final Gson GSON = new GsonBuilder()
+            .setPrettyPrinting()
+            .setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
+            .create();
+
+    /**
+     * Contains all of Worldback Machine's custom environment variables as well as pre-existing ones from elsewhere.
+     */
     public static final Dotenv DOTENV = Dotenv.configure()
             .directory(FabricLoader.getInstance().getModContainer(WorldbackMachineMod.MOD_ID).orElseThrow().getRootPaths().getFirst().toString())
             .ignoreIfMalformed()

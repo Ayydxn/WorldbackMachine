@@ -20,6 +20,7 @@
 			"com.ayydxn.worldbackmachine.WorldbackMachineMod"
 		]
 	},
+	"accessWidener": "worldback-machine.accesswidener",
 	"mixins": [
       "${id}.mixins.json"
 	],
