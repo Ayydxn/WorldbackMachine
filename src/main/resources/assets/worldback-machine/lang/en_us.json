@@ -1,0 +1,6 @@
+{
+  "worldback-machine.options.gui_button": "Worldback Machine Options",
+  "worldback-machine.options.category.worldback_machine": "Worldback Machine",
+  "worldback-machine.options.worldback_machine.saveWorld": "Save World",
+  "worldback-machine.options.worldback_machine.saveWorld.description": "Determines if this world should be saved to Google Drive or not."
+}

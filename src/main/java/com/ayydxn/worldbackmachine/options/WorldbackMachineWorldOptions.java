@@ -4,12 +4,9 @@ import com.ayydxn.worldbackmachine.WorldbackMachineMod;
 import com.ayydxn.worldbackmachine.utils.WorldUtils;
 import com.ayydxn.worldbackmachine.utils.WorldbackMachineConstants;
 import com.google.gson.JsonSyntaxException;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.WorldSavePath;
 import net.minecraft.world.World;
 import org.apache.commons.io.FileUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

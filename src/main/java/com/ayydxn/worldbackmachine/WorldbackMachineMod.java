@@ -5,11 +5,8 @@ import com.ayydxn.worldbackmachine.google.GoogleDriveBootstrap;
 import com.ayydxn.worldbackmachine.options.WorldbackMachineWorldOptions;
 import com.google.common.base.Preconditions;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.util.WorldSavePath;
-import net.minecraft.world.World;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
@@ -67,6 +64,11 @@ public class WorldbackMachineMod implements ModInitializer
     public static Logger getLogger()
     {
         return LOGGER;
+    }
+
+    public WorldbackMachineWorldOptions getWorldOptions()
+    {
+        return this.worldOptions;
     }
 
     public GoogleDriveAPI getGoogleDriveAPI()

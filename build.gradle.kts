@@ -18,6 +18,10 @@ repositories {
     // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
+
+    maven("https://maven.isxander.dev/releases") {
+        name = "Xander Maven"
+    }
 }
 
 dependencies {
@@ -29,6 +33,9 @@ dependencies {
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric_api_version")}")
 
+    // YACL (YetAnotherConfigLib)
+    modImplementation("dev.isxander:yet-another-config-lib:${rootProject.property("yacl_version")}")
+
     // Google APIs
     implementation("com.google.api-client:google-api-client:${rootProject.property("google_api_client_version")}")
     implementation("com.google.oauth-client:google-oauth-client-jetty:${rootProject.property("google_oauth_client_version")}")
@@ -39,6 +46,9 @@ dependencies {
     include("com.google.apis:google-api-services-drive:${rootProject.property("google_drive_api_version")}")
 
     // Utility Libraries
+    implementation("net.lingala.zip4j:zip4j:${rootProject.property("zip4j_version")}")
+    include("net.lingala.zip4j:zip4j:${rootProject.property("zip4j_version")}")
+
     implementation("io.github.cdimascio:dotenv-java:${rootProject.property("dotenv_version")}")
     include("io.github.cdimascio:dotenv-java:${rootProject.property("dotenv_version")}")
 }
@@ -55,7 +65,8 @@ tasks {
             "license" to rootProject.property("mod_license"),
             "minecraft_version" to rootProject.property("minecraft_version"),
             "fabric_api_version" to rootProject.property("fabric_api_version"),
-            "fabric_loader_version" to rootProject.property("fabric_loader_version")
+            "fabric_loader_version" to rootProject.property("fabric_loader_version"),
+            "yacl_version" to rootProject.property("yacl_version")
         )
 
         inputs.properties(expandProperties)
