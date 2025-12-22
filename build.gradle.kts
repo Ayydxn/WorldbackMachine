@@ -16,6 +16,14 @@ repositories {
     // for more information about repositories.
 
     maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
+
+    maven("https://maven.isxander.dev/releases") {
+        name = "Xander's Maven"
+    }
+
+    maven("https://maven.terraformersmc.com/") {
+        name = "Terraformers"
+    }
 }
 
 dependencies {
@@ -26,6 +34,12 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation("net.fabricmc.fabric-api:fabric-api:${rootProject.property("fabric_api_version")}")
+
+    // YetAnotherConfigLib
+    modImplementation("dev.isxander:yet-another-config-lib:${rootProject.property("yacl_version")}")
+
+    // ModMenu
+    modImplementation("com.terraformersmc:modmenu:${rootProject.property("modmenu_version")}")
 
     // DevAuth. Uncomment this if you would like to be logged into your Microsoft account when running the game.
     // After uncommenting this and reloading Gradle, you'll have to add -Ddevauth.enabled=true to your JVM arguments
@@ -45,7 +59,8 @@ tasks {
             "license" to rootProject.property("mod_license"),
             "minecraft_version" to rootProject.property("minecraft_version"),
             "fabric_api_version" to rootProject.property("fabric_api_version"),
-            "fabric_loader_version" to rootProject.property("fabric_loader_version")
+            "fabric_loader_version" to rootProject.property("fabric_loader_version"),
+            "yacl_version" to rootProject.property("yacl_version")
         )
 
         inputs.properties(expandProperties)
