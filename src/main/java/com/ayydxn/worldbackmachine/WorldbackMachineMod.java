@@ -5,20 +5,16 @@ import com.ayydxn.worldbackmachine.cloud.AutomaticBackupScheduler;
 import com.ayydxn.worldbackmachine.cloud.CloudStorageManager;
 import com.ayydxn.worldbackmachine.event.ServerLifecycleEventHandler;
 import com.ayydxn.worldbackmachine.options.WorldbackMachineGameOptions;
-import com.ayydxn.worldbackmachine.utils.WorldbackMachineConstants;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.entrypoint.EntrypointContainer;
-import net.minecraft.world.World;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * The main mod class for Worldback Machine.
@@ -48,15 +44,15 @@ public class WorldbackMachineMod implements ModInitializer
 
         LOGGER.info("Initializing Worldback Machine... (Version: {})", modVersion);
 
-        // Load mod settings
-        WorldbackMachineGameOptions.HANDLER.load();
-
         // Initialize the cloud storage manager.
         // This will also register the mod's built-in cloud storage providers.
         this.cloudStorageManager = new CloudStorageManager();
 
         // Register cloud storage providers from other mods
         this.registerCustomCloudStorageProviders();
+
+        // Load mod settings
+        WorldbackMachineGameOptions.HANDLER.load();
 
         // Lock the register and prevent further registration of storage providers
         // and select the storage provider to use based on the config
@@ -157,5 +153,15 @@ public class WorldbackMachineMod implements ModInitializer
     public WorldbackMachineGameOptions getGameOptions()
     {
         return WorldbackMachineGameOptions.HANDLER.instance();
+    }
+
+    /**
+     * Returns the active instance of the cloud storage manager.
+     *
+     * @return The active instance of the cloud storage manager.
+     */
+    public CloudStorageManager getCloudStorageManager()
+    {
+        return this.cloudStorageManager;
     }
 }

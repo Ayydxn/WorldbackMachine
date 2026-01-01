@@ -1,3 +1,12 @@
 {
-  "yacl3.config.worldback-machine:worldback-machine-settings.category.worldback_machine": "Worldback Machine"
+  "worldback_machine.options": "Worldback Machine...",
+  "worldback_machine.options.category.worldback_machine": "Worldback Machine",
+  "worldback_machine.options.group.general": "General",
+  "worldback_machine.options.general.cloud_storage_provider": "Cloud Storage Provider",
+  "worldback_machine.options.general.cloud_storage_provider.description": "The cloud storage provider that will be used when managing world backups.\n\nThe options available are those that come with the mod and ones registered by other mods.\n\nThe available options are:\n",
+  "worldback_machine.options.group.backups": "Backups",
+  "worldback_machine.options.backups.are_auto_backups_enabled": "Enable Auto Backups",
+  "worldback_machine.options.backups.are_auto_backups_enabled.description": "If enabled, the mod is allowed to automatically create and upload backups of the world on a configurable interval.",
+  "worldback_machine.options.backups.backup_interval_seconds": "Backup Interval",
+  "worldback_machine.options.backups.backup_interval_seconds.description": "How often the mod will create and upload backups of the world."
 }
