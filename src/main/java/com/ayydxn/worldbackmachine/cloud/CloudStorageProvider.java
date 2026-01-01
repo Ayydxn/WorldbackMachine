@@ -22,6 +22,8 @@ public interface CloudStorageProvider
      * <p>
      * Typically, this will the initiate a OAuth2 (or some other) authentication flow that involves signing in via a browser,
      * starting a local server or prompting the user for credentials.
+     * <p>
+     * To avoid blocking Minecraft's main game thread, it is recommended this is called on a separate thread.
      *
      * @throws IOException If error occurred during the authentication process.
      * @return True if authentication with the API was successful, false otherwise.
@@ -59,8 +61,6 @@ public interface CloudStorageProvider
     void deleteFile(String name) throws IOException;
 
     /**
-     * Gives a list of all files in cloud storage.
-     * <p>
      * Returns a list of all the names of the files stored in the mod's backup folder.
      *
      * @throws IOException If retrieving the list fails (for whatever reason), or we aren't authenticated with the provider's API.

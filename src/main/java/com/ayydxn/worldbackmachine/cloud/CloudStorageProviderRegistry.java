@@ -62,9 +62,10 @@ public class CloudStorageProviderRegistry
      * @param name     The unique name for this storage provider
      * @param instance An instance of the provider's implementation
      * @param modID    The ID of the mod registering this provider
-     * @return The current instance of the registry for method chaining
+     *
      * @throws IllegalArgumentException If the name is null, empty, or already registered
      * @throws IllegalStateException    If registry is locked
+     * @return The current instance of the registry for method chaining
      */
     public CloudStorageProviderRegistry register(String name, CloudStorageProvider instance, String modID)
     {
@@ -77,7 +78,9 @@ public class CloudStorageProviderRegistry
         if (instance == null)
             throw new IllegalArgumentException("Storage provider cannot be registered with a null instance!");
 
-        String normalizedProviderName = name.toLowerCase().trim();
+        String normalizedProviderName = name.toLowerCase()
+                .replace(" ", "_")
+                .trim();
 
         if (this.cloudStorageProviders.containsKey(normalizedProviderName))
         {
@@ -106,8 +109,8 @@ public class CloudStorageProviderRegistry
         {
             this.isLocked = true;
 
-            WorldbackMachineMod.LOGGER.info("The cloud storage provider has been locked with {} registered providers:",
-                    this.cloudStorageProviders.size());
+            WorldbackMachineMod.LOGGER.info("The cloud storage provider has been locked with {} registered {}:",
+                    this.cloudStorageProviders.size(), this.cloudStorageProviders.size() == 1 ? "provider" : "providers");
 
             for (CloudStorageProvider cloudStorageProvider : this.cloudStorageProviders.values())
                 WorldbackMachineMod.LOGGER.info("- {}", cloudStorageProvider.getProviderName());
@@ -125,7 +128,7 @@ public class CloudStorageProviderRegistry
         if (name == null)
             return false;
 
-        return this.cloudStorageProviders.containsKey(name.toLowerCase().trim());
+        return this.cloudStorageProviders.containsKey(name.toLowerCase().replace(" ", "_").trim());
     }
 
     /**
@@ -140,7 +143,7 @@ public class CloudStorageProviderRegistry
         if (name == null)
             return null;
 
-        return this.cloudStorageProviders.get(name.toLowerCase().trim());
+        return this.cloudStorageProviders.get(name.toLowerCase().replace(" ", "_").trim());
     }
 
     /**
@@ -174,7 +177,7 @@ public class CloudStorageProviderRegistry
         if (name == null)
             return null;
 
-        return this.cloudStorageProviderSourceMods.get(name.toLowerCase().trim());
+        return this.cloudStorageProviderSourceMods.get(name.toLowerCase().replace(" ", "_").trim());
     }
 
     /**

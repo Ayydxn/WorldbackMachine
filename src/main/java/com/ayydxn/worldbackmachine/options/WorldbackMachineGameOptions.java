@@ -41,7 +41,7 @@ public class WorldbackMachineGameOptions
 
     // TODO: (Ayydxn) Currently not configurable right now. Not like we're working with enum values, so we'll need a way to show this in an UI.
     @SerialEntry(comment = "The internal of the currently selected cloud storage provider. It's recommend to only change this via the in-game settings menu.")
-    public String activeCloudStorageProvider = "googledrive";
+    public String cloudStorageProvider = "google_drive";
 
     @AutoGen(category = "worldback_machine")
     @CustomName("Enable Auto Backups")

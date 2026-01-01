@@ -31,16 +31,12 @@ You can report any bugs or issues you come across using the [issue tracker](http
 - **A Google Cloud Project**
   - In order to be able to access and use the Google Drive, you'll need a Google Cloud project. You can follow [this guide](https://developers.google.com/workspace/drive/api/quickstart/java) to create one.
 
-
 Like most Minecraft mods, Worldback Machine uses the standard Gradle project structure and can be compiled by simply running the default `build` task. After running the task, the build artifacts can be found in the `build/libs` directory.
 
 In order to run the game from within your IDE, you'll need two more things: A Google OAuth 2.0 Client ID and a dotenv file.
 
-Firstly, in the `resources` directory, create a file called `.env`. Then copy and paste the following:
-```text
-# The location of the 'credentials.json' file starting from the 'resources' directory.
-CREDENTIALS_FILE=
-```
+Firstly, in the `resources` directory, create a directory called `auth`. Create a directory for the cloud provider you would like to use. For example, `google` or `onedrive`.
+Then, simply put all of your necessary authentication files in that directory. For example, for Google Drive, your `credentials.json` will go in that folder.
 
 Set the 'CREDENTIALS_FILE' to whatever you want. You can then follow the [Google Drive API Java Quickstart](https://developers.google.com/workspace/drive/api/quickstart/java) to a OAuth Client ID. Once you have it, put it to the location you have set in the 'CREDENTIALS_FILE' variable.
 

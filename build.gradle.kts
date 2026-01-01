@@ -41,6 +41,15 @@ dependencies {
     // ModMenu
     modImplementation("com.terraformersmc:modmenu:${rootProject.property("modmenu_version")}")
 
+    /* -- Google API Libraries -- */
+    implementation("com.google.api-client:google-api-client:${rootProject.property("google_api_version")}")
+    implementation("com.google.oauth-client:google-oauth-client-jetty:${rootProject.property("google_oauth_client_version")}")
+    implementation("com.google.apis:google-api-services-drive:${rootProject.property("google_drive_api_version")}")
+
+    include("com.google.api-client:google-api-client:${rootProject.property("google_api_version")}")
+    include("com.google.oauth-client:google-oauth-client-jetty:${rootProject.property("google_oauth_client_version")}")
+    include("com.google.apis:google-api-services-drive:${rootProject.property("google_drive_api_version")}")
+
     // DevAuth. Uncomment this if you would like to be logged into your Microsoft account when running the game.
     // After uncommenting this and reloading Gradle, you'll have to add -Ddevauth.enabled=true to your JVM arguments
     // in order to enable DevAuth.

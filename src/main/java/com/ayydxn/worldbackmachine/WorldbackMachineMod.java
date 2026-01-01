@@ -5,6 +5,7 @@ import com.ayydxn.worldbackmachine.cloud.AutomaticBackupScheduler;
 import com.ayydxn.worldbackmachine.cloud.CloudStorageManager;
 import com.ayydxn.worldbackmachine.event.ServerLifecycleEventHandler;
 import com.ayydxn.worldbackmachine.options.WorldbackMachineGameOptions;
+import com.ayydxn.worldbackmachine.utils.WorldbackMachineConstants;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import net.fabricmc.api.ModInitializer;
@@ -58,7 +59,12 @@ public class WorldbackMachineMod implements ModInitializer
         this.registerCustomCloudStorageProviders();
 
         // Lock the register and prevent further registration of storage providers
+        // and select the storage provider to use based on the config
         this.cloudStorageManager.lockRegistry();
+        this.cloudStorageManager.selectStorageProvider();
+
+        // Attempt to automatically authenticate with the selected cloud storage provider's API
+        this.cloudStorageManager.attemptAutoAuthentication();
 
         // Initialize the automatic backup scheduler
         this.automaticBackupScheduler = new AutomaticBackupScheduler(this.cloudStorageManager);

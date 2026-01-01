@@ -1,9 +1,11 @@
 package com.ayydxn.worldbackmachine.cloud;
 
 import com.ayydxn.worldbackmachine.WorldbackMachineMod;
+import com.ayydxn.worldbackmachine.cloud.google.GoogleDriveProvider;
 import com.ayydxn.worldbackmachine.options.WorldbackMachineGameOptions;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.Util;
 import net.minecraft.util.WorldSavePath;
 import net.minecraft.world.World;
 import net.minecraft.world.level.LevelProperties;
@@ -54,7 +56,46 @@ public class CloudStorageManager
      */
     private void registerBuiltInProviders()
     {
+        this.storageProviderRegistry.register("Google Drive", new GoogleDriveProvider(), WorldbackMachineMod.MOD_ID);
+
         WorldbackMachineMod.LOGGER.info("Registered {} built-in cloud storage providers", this.storageProviderRegistry.getProviderCount());
+    }
+
+    public void attemptAutoAuthentication()
+    {
+        if (this.activeStorageProvider == null)
+        {
+            WorldbackMachineMod.LOGGER.warn("No cloud storage provider is currently active for auto authentication!");
+            return;
+        }
+
+        WorldbackMachineMod.LOGGER.info("Attempting automatic authentication with storage provider '{}'...", this.activeStorageProvider.getProviderName());
+
+        Util.getIoWorkerExecutor().execute(() ->
+        {
+            try
+            {
+                boolean authenticationSuccess = this.activeStorageProvider.authenticate();
+
+                if (authenticationSuccess && this.activeStorageProvider.isAuthenticated())
+                {
+                    WorldbackMachineMod.LOGGER.info("Successfully authenticated with '{}' using stored credentials",
+                            this.activeStorageProvider.getProviderName());
+                }
+                else
+                {
+                    WorldbackMachineMod.LOGGER.warn("Auto-authentication with '{}' failed - Stored credentials may be invalid. " +
+                                    "Use /cloudsaves authenticate to sign in manually", this.activeStorageProvider.getProviderName());
+                }
+            }
+            catch (Exception exception)
+            {
+                WorldbackMachineMod.LOGGER.error("Auto authencation with storage proivder '{}' failed. " +
+                                "Use /worldback-machine authenticate to sign-in manually\n{}", this.activeStorageProvider.getProviderName(),
+                        exception.getMessage());
+            }
+
+        });
     }
 
     /**
@@ -257,6 +298,19 @@ public class CloudStorageManager
     }
 
     /**
+     * Selects the cloud provider that will be used based on the user's {@link WorldbackMachineGameOptions#cloudStorageProvider setting}
+     */
+    public void selectStorageProvider()
+    {
+        String cloudStorageProvider = WorldbackMachineGameOptions.HANDLER.instance().cloudStorageProvider;
+        this.activeStorageProvider = this.getRegistry().getProviderInstance(cloudStorageProvider);
+
+        // Default to Google Drive
+        if (this.activeStorageProvider == null)
+            this.activeStorageProvider = this.getRegistry().getProviderInstance("google_drive");
+    }
+
+    /**
      * Gets the provider registry.
      *
      * <p>The registry allows querying and managing registered providers.
@@ -304,7 +358,7 @@ public class CloudStorageManager
             this.activeStorageProvider = cloudStorageProvider;
 
             WorldbackMachineGameOptions gameOptions = WorldbackMachineMod.getInstance().getGameOptions();
-            gameOptions.activeCloudStorageProvider = providerName.toLowerCase();
+            gameOptions.cloudStorageProvider = providerName.toLowerCase();
             gameOptions.save();
 
             WorldbackMachineMod.LOGGER.info("The active cloud provider has been switched to '{}'", cloudStorageProvider.getProviderName());
